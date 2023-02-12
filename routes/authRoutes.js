@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const router = Router()
+const passport = require('passport')
 
-router.get('/login', (req, res) => {
-    res.send('Hello world')
-})
+router.get('/google', passport.authenticate('google', {
+    scope:['profile']
+}))
 
 module.exports = router
