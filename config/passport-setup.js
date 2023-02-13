@@ -32,7 +32,7 @@ passport.use(
           if (currentUser){
              // already exists
              console.log("User already exists")
-             done(null, currentUser)
+             //done(null, currentUser)
              
           }
           else{
