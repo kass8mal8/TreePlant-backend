@@ -33,8 +33,7 @@ app.use(session({
     secret: KEY,
     resave: false,
     saveUninitialized: true
-    })
-)
+}))
 
 app.use(passport.initialize())
 app.use(passport.session())

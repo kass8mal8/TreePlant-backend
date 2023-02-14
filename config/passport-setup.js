@@ -24,7 +24,7 @@ passport.use(
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: "/auth/google/redirect"
   },(accessToken, refreshToken, profile, done) => {
-    // check if user already exists in the db
+    // check if user already exists in the database
 
     const checkUser = async() => {
         try {
@@ -32,8 +32,7 @@ passport.use(
           if (currentUser){
              // already exists
              console.log("User already exists")
-             //done(null, currentUser)
-             
+             done(null, currentUser)
           }
           else{
               // create new user
@@ -41,9 +40,8 @@ passport.use(
                 username:profile.displayName,
                 googleID:profile.id,
                 photoURL:profile.photos[0].value
-                })
+              })
               console.log(`Added user ${newUser}`);
-              console.log(newUser._id);
 
               done(null, newUser)
           }
