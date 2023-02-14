@@ -9,21 +9,17 @@ passport.serializeUser((user, done)=> {
   done(null, user.id)
 })
 
-passport.deserializeUser( async(id, done) => {
-  try {
-      const user = await User.findById(id)
-      done(null, user)
-  } catch (error) {
-    console.log(error.message);
-  }
-})
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => { done(err, user) })
+});
 
-passport.use(
-  new GoogleStrategy({
+
+const googleStrategy = new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: "/auth/google/redirect"
-  },(accessToken, refreshToken, profile, done) => {
+  },
+  (accessToken, refreshToken, profile, done) => {
     // check if user already exists in the database
 
     const checkUser = async() => {
@@ -54,5 +50,7 @@ passport.use(
 
     checkUser()
   }
-));
+)
+
+passport.use(googleStrategy);
 

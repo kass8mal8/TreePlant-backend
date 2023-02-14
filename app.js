@@ -1,14 +1,18 @@
 const express = require('express')
 const app = express()
-const session = require('express-session');
+const sessions = require('express-session');
 const passport = require('passport')
-
 require('dotenv').config()
 const passportSetup = require('./config/passport-setup')
 
 const mongoose = require('mongoose')
 const { MONGO_URI, KEY } = process.env
 
+app.use(sessions({
+    secret: KEY,
+    resave: false,
+    saveUninitialized: true
+}))
 
 // connect to mongodb
 const connect = () => {
@@ -29,11 +33,7 @@ const authRoutes = require('./routes/authRoutes')
 
 // use the various middleware
 app.use('/auth', authRoutes)
-app.use(session({
-    secret: KEY,
-    resave: false,
-    saveUninitialized: true
-}))
+
 
 app.use(passport.initialize())
 app.use(passport.session())
