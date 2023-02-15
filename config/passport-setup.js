@@ -17,7 +17,7 @@ passport.deserializeUser((id, done) => {
 const googleStrategy = new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/redirect"
+    callbackURL: "https://api-tree-planting.onrender.com/auth/google/redirect"
   },
   (accessToken, refreshToken, profile, done) => {
     // check if user already exists in the database
