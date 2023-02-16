@@ -7,12 +7,17 @@ const passportSetup = require('./config/passport-setup')
 
 const mongoose = require('mongoose')
 const { MONGO_URI, KEY } = process.env
+const cors = require('cors')
+
+app.use(cors())
 
 app.use(sessions({
     secret: KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 }
+    cookie: { 
+        maxAge: 24 * 60 * 60 * 1000 
+    }
 }))
 
 // connect to mongodb
