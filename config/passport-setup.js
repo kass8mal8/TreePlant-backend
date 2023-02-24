@@ -13,8 +13,6 @@ passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => { done(err, user) })
 });
 
-const user_ID = undefined
-
 const googleStrategy = new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
@@ -30,7 +28,6 @@ const googleStrategy = new GoogleStrategy({
              // already exists
              console.log("User already exists")
              done(null, currentUser)
-             user_ID = profile.id
           }
           else{
               // create new user
@@ -54,7 +51,5 @@ const googleStrategy = new GoogleStrategy({
   }
 )
 
-console.log(user_ID);
 
 passport.use(googleStrategy);
-module.exports = user_ID

@@ -1,3 +1,4 @@
+const cors = require('cors')
 const express = require('express')
 const app = express()
 const sessions = require('express-session');
@@ -7,7 +8,7 @@ const passportSetup = require('./config/passport-setup')
 
 const mongoose = require('mongoose')
 const { MONGO_URI, KEY } = process.env
-const cors = require('cors')
+
 
 app.use(cors())
 
@@ -16,7 +17,7 @@ app.use(sessions({
     resave: false,
     saveUninitialized: true,
     cookie: { 
-        maxAge: 24 * 60 * 60 * 1000 
+        maxAge: 48 * 60 * 60 * 1000 
     }
 }))
 
