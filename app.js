@@ -5,12 +5,14 @@ const sessions = require('express-session');
 const passport = require('passport')
 require('dotenv').config()
 const passportSetup = require('./config/passport-setup')
+const { corsOptions } = require('./config/corsOptions');
+
 
 const mongoose = require('mongoose')
 const { MONGO_URI, KEY } = process.env
 
 
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use(sessions({
     secret: KEY,
@@ -36,7 +38,7 @@ const connect = () => {
 connect()
 
 
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes');
 
 // use the various middleware
 app.use('/auth', authRoutes)
